@@ -1,23 +1,28 @@
+//players' score
 let score = 0;
+let elementArray = [];
+//to create the Grid for 81 cells
 function createGridElements(){
     const parent = document.querySelector("#gridContainer");
     for(let i = 1;i<=81;i++){
         let divElement = document.createElement("div");
         divElement.classList.add("element_normal");
+        divElement.setAttribute("element_no",i);
+        let id = "cell_"+i;
+        divElement.setAttribute("id",id);
         parent.appendChild(divElement);
     }    
 }
+//calling the function to create 81 cells
 createGridElements();
-function fillNumbers(array,listElements){
-    for(let i = 0;i<listElements.length;i++){
-        if(array.includes(i+1)){
-            listElements[i].innerHTML = i+1;
-        }
-    }
-}
+
+
+//function to create random number between 1 to 81
 function makeRandomNumber(){
     return Math.floor(Math.random()*81) + 1;
 }
+
+//making a random numbers unique array of 10 elements
 function makeArray(array){
     while(array.length<10){
         let number = makeRandomNumber();
@@ -27,35 +32,92 @@ function makeArray(array){
     }
     return array;
 }
+//filling the numbers of the 
+//random numbers unique array in the cells
+function putTheBombs(array,listElements){
+    for(let i = 0;i<listElements.length;i++){
+        if(array.includes(i+1)){
+            listElements[i].classList.add("putBombs");
+        }
+    }
+}
+
+function showTheBombs(){
+    const bombs = document.querySelectorAll(".putBombs");
+    for(let bomb of bombs){
+        bomb.style.backgroundImage = "url('https://img.icons8.com/emoji/48/000000/bomb-emoji.png')";
+        bomb.style.backgroundRepeat = "no-repeat";
+        bomb.style.backgroundSize = "contain";
+        bomb.style.backgroundPosition = "center";
+        bomb.style.backgroundColor = "red";
+    }
+    setTimeout(reset,5000);
+    // reset();
+}
+//reset button functionality
 function reset(){
     let result = [];
+    score = 0;
     result = makeArray(result);
+    console.log(result);
     let listElements = document.querySelectorAll(".element_normal");
     for(let element of listElements){
-        element.innerHTML="";
+        element.classList.remove("putBombs");
+        element.style.backgroundImage = "none";
+        element.style.backgroundColor = "white";
     }
-    fillNumbers(result,listElements);
+    putTheBombs(result,listElements);
+    let scoreContainer = document.getElementById("gameScore");
+    scoreContainer.innerHTML = 0;
+    const resultDisplay = document.getElementById("resultDisplay");
+    resultDisplay.innerHTML = "";
 }
-// console.log(result);
+function checkScore(score){
+    if(score==71){
+        const resultDisplay = document.getElementById("resultDisplay");
+        resultDisplay.style.backgroundColor = "white";
+        resultDisplay.style.color = "green";
+        resultDisplay.innerHTML = "win";
+    }
+    setTimeout(reset,7000);
+}
+
+
+//getting the reset button object
 const resetbtn = document.getElementById("resetButton");
+
+//when reset button is clicked, adding event listener
+//to make array of 10 random unique numbers and filling in
+//the cells
 resetbtn.addEventListener("click",reset);
+
+//getting all the cells
 let listElements = document.querySelectorAll(".element_normal");
-console.log(listElements[0]);
+
+//adding eventlistener to each cell
 listElements.forEach(function(element){
     element.addEventListener("click",function(e){
-        let bombNumber = e.currentTarget.innerHTML;
-        console.log(typeof bombNumber,bombNumber+"empty");
+        let elementNo = e.currentTarget.getAttribute("element_no");
+        console.log(e.currentTarget);
+        let bombNumber = e.currentTarget.classList;
         let scoreContainer = document.getElementById("gameScore");
-        console.log(score);
-        if(bombNumber.length===0){
-            score++;
+
+        if(!bombNumber.contains("putBombs")){
+            if(!elementArray.includes(elementNo)){
+                score++;
+                e.currentTarget.style.backgroundColor = "green";
+                elementArray.push(elementNo);
+                
+                // checkScore(score);
+            }
         }
         else{
             score = 0;
+            showTheBombs();
         }
         let result = String(score);
         console.log("result is "+result);
         scoreContainer.innerHTML=result;
         });
     
-});
+}); 

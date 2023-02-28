@@ -1,47 +1,38 @@
-function add_removeClass(array,item,addclass){
-    for(let element of array){
-        if(element.classList.includes(item))
-            element.classList.add(addclass);
-        else
-            element.classList.remove(addclass);
+function removeImageClass(){
+    const images = document.querySelectorAll(".content");
+    for(let image of images){
+        if(image.classList.contains("show"))
+            image.classList.remove("show");
     }
 }
-
-const image1 = document.querySelector("#tree_image");
-const image2 = document.querySelector("#laptops_image");
-const image3 = document.querySelector("#pen_image");
-const image4 = document.querySelector("#newton_image");
+function removeButtonClass(){
+    const buttons = document.querySelectorAll(".btn");
+    for(let btn of buttons){
+        if(btn.classList.contains("active"))
+            btn.classList.remove("active");
+    }
+}
 const btns = document.querySelectorAll(".btn");
 btns.forEach(function(btn){
     btn.addEventListener("click",function(event){
+        removeImageClass();
+        removeButtonClass();
         const styles = event.currentTarget.classList;
         if(styles.contains("tree")){
-            image1.classList.add("show");
-            image2.classList.remove("show");
-            image3.classList.remove("show");
-            image4.classList.remove("show");
-            add_removeClass(btns,"tree","active");
+            document.getElementById("tree_image").classList.add("show");
+            styles.add("active");
         }
         else if(styles.contains("laptops")){
-            image2.classList.add("show");
-            image1.classList.remove("show");
-            image3.classList.remove("show");
-            image4.classList.remove("show");
-            add_removeClass(btns,"laptops","active");
+            document.getElementById("laptops_image").classList.add("show");
+            styles.add("active");
         }
         else if(styles.contains("pen")){
-            image3.classList.add("show");
-            image2.classList.remove("show");
-            image1.classList.remove("show");
-            image4.classList.remove("show");
-            add_removeClass(btns,"pen","active");
+            document.getElementById("pen_image").classList.add("show");
+            styles.add("active");
         }
         else if(styles.contains("newton")){
-            image4.classList.add("show");
-            image2.classList.remove("show");
-            image3.classList.remove("show");
-            image1.classList.remove("show");
-            add_removeClass(btns,"newton","active");
+            document.getElementById("newton_image").classList.add("show");
+            styles.add("active");
         }
     });
 });
