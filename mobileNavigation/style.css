@@ -1,0 +1,36 @@
+.btn{
+    background-color: orangered;
+    color:white;
+    border:1px solid whitesmoke;
+    border-radius:4px;
+    padding:4px;
+}
+ul{
+    list-style: none;
+}
+li{
+    display: inline;
+    margin:5px;
+    padding:5px;
+}
+.active{
+    background-color: red;
+    color:white;
+    border:1px solid whitesmoke;
+    border-radius:4px;
+    padding:4px;
+}
+.content{
+    display:none;
+}
+.show{
+    display:block;
+}
+.btn:hover,.active:hover{
+    background-color: black;
+    color: white;
+}
+img{
+    width:auto;
+    height:500px;
+}
