@@ -67,6 +67,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: black; */
     color: white;
     font-size: 40px;
     font-weight: bolder;
@@ -84,8 +85,8 @@ button {
     justify-content: center;
     align-items: center;
     /* visibility: hidden; */
-    background-color: white;
-    border:0.5px solid black;
+    background-color: #4d1255;
+    border:0.5px solid white;
     color:white;
     /* text-align: center; */
     /* margin-top:1px; */

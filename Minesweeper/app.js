@@ -1,5 +1,6 @@
 //players' score
 let score = 0;
+let currentScore = 0;
 let elementArray = [];
 //to create the Grid for 81 cells
 function createGridElements(){
@@ -41,8 +42,15 @@ function putTheBombs(array,listElements){
         }
     }
 }
+//show the result
+function showResult(text){
+    const resultDisplay = document.getElementById("resultDisplay");
+    resultDisplay.innerHTML = text;
+    setTimeout(reset,5000);
+}
 
-function showTheBombs(){
+//if placed on the bomb, then show all the bombs
+function showTheBombs(curScore){
     const bombs = document.querySelectorAll(".putBombs");
     for(let bomb of bombs){
         bomb.style.backgroundImage = "url('https://img.icons8.com/emoji/48/000000/bomb-emoji.png')";
@@ -51,37 +59,37 @@ function showTheBombs(){
         bomb.style.backgroundPosition = "center";
         bomb.style.backgroundColor = "red";
     }
-    setTimeout(reset,5000);
-    // reset();
+    showResult("GAME OVER!!! Your score is "+curScore);
 }
+
 //reset button functionality
 function reset(){
+    //element array is used to check if a cell is clicked more than 1 time
+    //then score should not increase
+    elementArray.length = 0;
     let result = [];
     score = 0;
     result = makeArray(result);
     console.log(result);
     let listElements = document.querySelectorAll(".element_normal");
+
+    //this loop is for removing all the bombs when reset
     for(let element of listElements){
         element.classList.remove("putBombs");
         element.style.backgroundImage = "none";
-        element.style.backgroundColor = "white";
+        element.style.backgroundColor = "#4d1255";
     }
+    //bombs are put randomly now
     putTheBombs(result,listElements);
+
+    //to reset the score to zero
     let scoreContainer = document.getElementById("gameScore");
     scoreContainer.innerHTML = 0;
-    const resultDisplay = document.getElementById("resultDisplay");
+
+    //to delete the displayed result
+    let resultDisplay = document.getElementById("resultDisplay");
     resultDisplay.innerHTML = "";
 }
-function checkScore(score){
-    if(score==71){
-        const resultDisplay = document.getElementById("resultDisplay");
-        resultDisplay.style.backgroundColor = "white";
-        resultDisplay.style.color = "green";
-        resultDisplay.innerHTML = "win";
-    }
-    setTimeout(reset,7000);
-}
-
 
 //getting the reset button object
 const resetbtn = document.getElementById("resetButton");
@@ -107,17 +115,17 @@ listElements.forEach(function(element){
                 score++;
                 e.currentTarget.style.backgroundColor = "green";
                 elementArray.push(elementNo);
-                
-                // checkScore(score);
             }
         }
         else{
+            currentScore = score;
             score = 0;
-            showTheBombs();
+            showTheBombs(currentScore);
         }
         let result = String(score);
         console.log("result is "+result);
         scoreContainer.innerHTML=result;
+        if(score===71)
+            showResult("Congratulations You won, Your score is 71");
         });
-    
-}); 
+});  
