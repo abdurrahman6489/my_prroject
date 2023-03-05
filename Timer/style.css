@@ -1,0 +1,123 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background-color: black;
+}
+h1,span{
+    color:orange;
+}
+span{
+    font-size: larger;
+}
+h1{
+    margin-top:15vh;
+}
+.container{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height:80dvh;
+    width:80dvw;
+    /* border: 1px solid white; */
+    margin: auto;
+    /* align-content: center; */
+}
+.innerContainer{
+    display : flex;
+    flex-direction:row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width:60dvw;
+    height:40dvh;
+    background-color: hsla(0, 0%, 20%, 0.637);
+    border:1px solid orange;
+    border-radius:10px;
+    margin:auto;
+    position:absolute;
+    top:25vh;
+    left:20dvw;
+}
+.box{
+    display : flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width:70%;
+    height:100%;
+    /* border:1px solid yellow; */
+}
+.buttonContainer{
+    display : flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+    height:100%;
+    /* border:1px solid green; */
+}
+.btn{
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width:60%;
+    height:15%;
+    background-color: orangered;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:4px;
+    margin:4px;
+    font-size:90%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.btn:hover,.active:hover{
+    background-color: black;
+    color: white;
+}
+.active{
+    background-color: red;
+    color:white;
+    border:1px solid whitesmoke;
+    border-radius:4px;
+    padding:4px;
+}
+.inputs{
+    width:15%;
+    height:15%;
+    background-color: black;
+    color:white;
+    border:1px solid orange;
+    text-align: center;
+    font-size: 100%;
+    border-radius: 8px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.ProgressBar{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    height:5vh;
+    width:60dvw;
+    background-color: rgba(128, 128, 128, 0.342);
+    border-radius:8px;
+    border: thin solid orange;
+}
+.bar{
+    width:1%;
+    height:98%;
+    background-color: orangered;
+}
