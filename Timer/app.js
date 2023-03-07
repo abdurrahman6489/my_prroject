@@ -1,16 +1,34 @@
+//progress bar
 let ProgressBarContainer = document.getElementById("ProgressBar");
-let secondInput =  document.getElementById("sec").value;
-let minuteInput = document.getElementById("min").value;
-let hourInput = document.getElementById("hr").value;
-let startTime = document.getElementById("start");
-startTime.addEventListener("click",totalTime);
-function totalTime(){
-    let totalseconds = secondInput*1 + 60*minuteInput + 3600*hourInput;
-    console.log(totalseconds);
-}
-
 let ProgressBar = document.getElementById("ProgressBar");
 
+//taking input from the timer inputs hr, min and seconds
+let secondInput =  document.getElementById("sec");
+let minuteInput = document.getElementById("min");
+let hourInput = document.getElementById("hr");
+
+//calculating seconds, minutes and hours
+let seconds = Number(secondInput.value);
+let minutes = Number(minuteInput.value);
+let hours = Number(hourInput.value);
+let setTime = Number(secondInput.value) + Number(minuteInput.value)*60 + Number(hourInput.value)*3600;
+let startTiem = new Date();
+console.log(setTime);
+
+//adding Event listeners to StartBtn
+let startBtn = document.getElementById("start");
+startBtn.addEventListener("click",totalTime);
+startBtn.addEventListener("click",showSeconds);
+
+//adding event listener to Reset Btn
+let resetBtn = document.getElementById("reset");
+resetBtn.addEventListener("click",totalTime);
+
+//adding event listener to Pause Btn
+let pauseBtn = document.getElementById("pause");
+pauseBtn.addEventListener("click",totalTime);
+
+//let 
 // let i = 0;
 // function progress(){
 //     if(i==0){
