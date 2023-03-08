@@ -12,13 +12,15 @@
     <div class="container">
         <h1>Timer</h1>
         <div class="innerContainer">
-            <div class="box" id="box">
-                <input type="number" id="hr" class="inputs" minlength="0" maxlength="24" placeholder="hr"/>
-                <span>:</span>
-                <input type="number" id="min" class="inputs" minlength="0" maxlength="60" placeholder="min"/>
-                <span>:</span>
-                <input type="number" id="sec" class="inputs" minlength="0" maxlength="60" placeholder="sec"/>
-            </div>
+            
+                <div class="box" id="box">
+                    <input type="number" id="hr" class="inputs" minlength="0" maxlength="24" placeholder="hr"/>
+                    <span>:</span>
+                    <input type="number" id="min" class="inputs" minlength="0" maxlength="60" placeholder="min"/>
+                    <span>:</span>
+                    <input type="number" id="sec" class="inputs" minlength="0" maxlength="60" placeholder="sec" autocomplete="on"/>
+                </div>
+            
             <div class="buttonContainer" id="buttonContainer">
                 <button class="btn start" id="start">Start</button>
                 <button class="btn pause">Pause</button>
@@ -31,4 +33,4 @@
     </div>
     <script src="./app.js"></script>
 </body>
-</html>
+</html> 
