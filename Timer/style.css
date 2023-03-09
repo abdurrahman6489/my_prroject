@@ -38,7 +38,7 @@ h1{
     border:1px solid orange;
     border-radius:10px;
     margin:auto;
-    position:absolute;
+    /* position:absolute; */
     top:25vh;
     left:20dvw;
 }
@@ -120,4 +120,9 @@ input::-webkit-inner-spin-button {
     width:1%;
     height:98%;
     background-color: orangered;
+}
+.progressIndicator{
+    color: orange;
+    font-size:20px;
+    font-weight: bold;
 }

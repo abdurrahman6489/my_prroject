@@ -12,13 +12,12 @@
     <div class="container">
         <h1>Timer</h1>
         <div class="innerContainer">
-            
                 <div class="box" id="box">
-                    <input type="number" id="hr" class="inputs" minlength="0" maxlength="24" placeholder="hr"/>
+                    <input type="number" id="hr" class="inputs" min="0" max="24" placeholder="hr"/>
                     <span>:</span>
-                    <input type="number" id="min" class="inputs" minlength="0" maxlength="60" placeholder="min"/>
+                    <input type="number" id="min" class="inputs" min="0" max="60" placeholder="min"/>
                     <span>:</span>
-                    <input type="number" id="sec" class="inputs" minlength="0" maxlength="60" placeholder="sec" autocomplete="on"/>
+                    <input type="number" id="sec" class="inputs" min="0" max="60" placeholder="sec" autocomplete="on"/>
                 </div>
             
             <div class="buttonContainer" id="buttonContainer">
@@ -27,9 +26,11 @@
                 <button class="btn reset">Reset</button>
             </div>
         </div>
+        <div class="progressIndicator">0%</div>
         <div class="ProgressBar" id="ProgressBar">
             <div class="bar" id="bar"></div>
         </div>
+        
     </div>
     <script src="./app.js"></script>
 </body>

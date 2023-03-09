@@ -1,28 +1,39 @@
 //progress bar
-const ProgressBarContainer = document.getElementById("ProgressBar");
-const ProgressBar = document.getElementById("ProgressBar");
-let resetBtn = document.querySelector(".reset");
-let pauseBtn = document.querySelector(".pause");
+const progressBarContainer = document.getElementById("ProgressBar");
+const progressBar = document.getElementById("bar");
+const progressIndicator = document.querySelector(".progressIndicator");
+//reset, pause and start buttons
+const resetBtn = document.querySelector(".reset");
+const pauseBtn = document.querySelector(".pause");
 const startBtn = document.querySelector(".start");
 
-let sec, min, hrs, setTime, startTime, futureTime,remainingTime;
+//variables
+let sec, min, hrs, setTime, startTime, futureTime, remainingTime;
 let interval, pauseDuration = 0;
 let start = false;
+let pauseStart = 0;
+let pauseResume = 0;
+let widthofProgessBar = 1;
 
+
+//reset function to reset the timer to initial stage
 function reset(){
     clearInterval(interval);
     remainingTime = 0;
     start = false;
+    pauseDuration = 0;
+    pauseBtn.innerHTML = "Pause";
+    progressBarIndicator(0);
+    progressIndicatorPercent(0);
     let input = document.querySelectorAll(".inputs");
-    input[2].value = "";
-    input[1].value = "";
-    input[0].value = "";
+    input[2].value = "00";
+    input[1].value = "00";
+    input[0].value = "00";
     console.log("timer reset");
 }
 
+//pause the timer it will hold the previous time
 function pause(){
-    let pauseStart = 0;
-    let pauseResume = 0;
     if(start){
         pauseStart = Date.now();
         clearInterval(interval);
@@ -31,17 +42,19 @@ function pause(){
     }
     else{
         pauseResume = Date.now();
-        interval = setInterval(countdownTimer,1000);
+        pauseDuration += pauseResume - pauseStart;
         pauseBtn.innerHTML = "Pause";
         start = true;
-        pauseDuration = pauseResume - pauseStart;
+        // console.log("pause duration from pause function is "+pauseDuration);
+        interval = setInterval(countdownTimer,1000);
     }
-    
 }
+
+//main function to count down the timer
 function countdownTimer(){
-    let currentTime = Date.now() - pauseDuration;
-    remainingTime = (futureTime - currentTime);
-    
+    let currentTime = Date.now() ;
+    remainingTime = (futureTime - currentTime) + pauseDuration;
+    // console.log("pause duration from countDownTimer function is "+pauseDuration);
     let input = document.querySelectorAll(".inputs");
     if(Math.floor(remainingTime)>0){
         hrs = Math.floor(remainingTime/3600000);
@@ -50,13 +63,15 @@ function countdownTimer(){
         input[2].value = sec;
         input[1].value = min;
         input[0].value = hrs;
-        console.log("remaining time "+remainingTime/1000);
-        // console.log(sec);
+        // console.log("remaining time "+remainingTime/1000);
+        widthofProgessBar = (remainingTime*100)/setTime;
+        console.log("width of progress bar is "+ widthofProgessBar);
+        progressBarIndicator(100-widthofProgessBar);
+        progressIndicatorPercent(100-widthofProgessBar)
     }
     else{
         reset();
-    }
-    
+    }   
 }
 
 //adding Event listeners to StartBtn
@@ -74,8 +89,8 @@ startBtn.addEventListener("click",(e)=>{
         setTime = sec + min + hrs;
         startTime = Date.now();
         futureTime = startTime + setTime;
-        interval = setInterval(countdownTimer,1000);
         start = true;
+        interval = setInterval(countdownTimer,1000);
     }
 
 });
@@ -86,12 +101,15 @@ resetBtn.addEventListener("click",reset);
 //adding event listener to Pause Btn
 pauseBtn.addEventListener("click",pause);
 
-//let 
-// let i = 0;
-// function progress(){
-//     if(i==0){
-//         i = 1;
 
-//     }
-// }
+function progressBarIndicator(width=1){
+    console.log("width is "+width);
+    progressBar.style.width = width+"%";
+}
+function progressIndicatorPercent(percent){  
+    percent = parseInt(percent);
+    progressIndicator.innerHTML = percent+"%";
+}
+
+
  
