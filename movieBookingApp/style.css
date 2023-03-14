@@ -174,4 +174,8 @@ img{
 .lang,.rating{
     margin: 3px;
 }
+.active{
+    background-color: orangered;
+    color:white
+}
 
