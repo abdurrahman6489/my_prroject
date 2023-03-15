@@ -14,6 +14,7 @@ const genreQuery = BASE_URL+"genre/movie/list?"+API_KEY+"&language=en-US";
 const searchQuery = "search/movie?";
 const searchURL = BASE_URL + searchQuery + API_KEY+ "&query=";
 
+
 // getMovieRuntime("315162");
 function getMovieRuntime(movieId){
     let url = BASE_URL + "movie/" + movieId +"?"+ API_KEY;
@@ -28,7 +29,6 @@ getGenres(genreQuery);
 //fetch url to get movies
 function getMovies(url){
     fetch(url).then(res => res.json()).then(data =>{
-        // console.log(data);
         addMovie(data.results);
     });
 }
@@ -42,14 +42,16 @@ function getGenres(url){
 }
 
 // getGenreName(28);
-function getGenreName(id){
+function getGenreName(currentId){
+
   let url = genreQuery;
   fetch(url).then(res=> res.json()).then(data=>{
     for(let genreData of data.genres){
-      if(genreData.id===id){
-        console.log("in getGenreName function " + genreData.id);
-        console.log("in getGenreName function " + genreData.name);
-        return genreData.name;
+      let {id,name} = genreData;
+      if(genreData.id===currentId){
+        console.log("in getGenreName function " + id);
+        console.log("in getGenreName function " + name);
+        currentGenre = name;
       }
     }
 });
@@ -87,6 +89,7 @@ function addMovie(data){
             let {title,poster_path,original_language,vote_average,overview} = movie;
             let movieElement = document.createElement("div");
             movieElement.classList.add("movies");
+            movieElement.id = movie.id;
             movieElement.innerHTML = `<img src=${IMAGE_URL+poster_path} alt="movie"/>
             <h3 class="title">${title}</h3>
             <div class="lang-rating-container">
@@ -95,14 +98,14 @@ function addMovie(data){
             </div>`;
             movieCardContainer.appendChild(movieElement);
             movieElement.addEventListener("click",(e)=>{
-              let movieRuntime = getMovieRuntime(movie.id.toString());
-              let genreId = movie.genre_ids[0];
-              console.log(genreId);
-              // let movieGenreName = getGenreName(genreId);
-              // getGenreName(genreId);
-              console.log("movie selected with " + getGenreName(genreId));
-              // const selectedMovie = new FillSelectedMovieDetails(title,vote_average,original_language,movieGenreName,movieRuntime,overview,IMAGE_URL+poster_path);
-              // console.log(selectedMovie.duration);
+              let movieId= e.currentTarget.id;
+              let url = BASE_URL + "movie/" + movieId +"?"+ API_KEY;
+              fetch(url).then(res=> res.json()).then(data=>{
+                // return data.runtime;
+                console.log(data);
+                console.log(IMAGE_URL+data.poster_path);
+              });
+
             });
         });
 }
