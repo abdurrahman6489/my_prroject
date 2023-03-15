@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Booking App</title>
     <link href="./style.css" rel="stylesheet">
+    <link href="./modal.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -14,9 +15,11 @@
             <input type="text" id="search" placeholder="search the movie" required/>
             <button type="submit" id="searchBtn">Search</button>
         </nav>
+        <div class="modal" id="modal">
+
+        </div>
+        <div id="overlay"></div>
         <aside class="genre-container">
-            <!-- <div class="genre-heading">Genre</div>
-            <div class="genres" id="">Action</div> -->
         </aside>
         <div class="movie-container">
             <h1>Get Now Playing</h1>

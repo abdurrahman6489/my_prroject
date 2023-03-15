@@ -117,8 +117,8 @@ h1{
     font-size: 22px;
 }
 input{
-    width:13%;
-    height:24px;
+    width:16%;
+    height:65%;
     background-color: rgba(35, 6, 88, 0.411);
     border: 1px solid white;
     border-radius: 10px;
@@ -126,7 +126,7 @@ input{
     font-size:17px;
 }
 input::placeholder{
-    font-size:12px;
+    font-size:15px;
     color:hsla(60, 100%, 50%, 0.603);
 }
 input:hover{
@@ -143,8 +143,8 @@ button{
     display:flex;
     justify-content: center;
     align-items: center;
-    width:7%;
-    height:24px;
+    width:10%;
+    height:60%;
     background-color: green;
     color: white;
     border-radius: 10px;

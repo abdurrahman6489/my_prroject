@@ -2,6 +2,8 @@ const movieCardContainer = document.querySelector(".movieCard-Container");
 const genreContainer = document.querySelector(".genre-container");
 let input = document.getElementById("search");
 let searchBtn = document.getElementById("searchBtn");
+
+
 //api build
 const API_KEY = "api_key=7c5c9621868ea67c0f1ac5f1719ab556";
 const BASE_URL = "https://api.themoviedb.org/3/";
@@ -104,6 +106,8 @@ function addMovie(data){
                 // return data.runtime;
                 console.log(data);
                 console.log(IMAGE_URL+data.poster_path);
+                const modal = document.querySelector(".modal");
+                openModal(modal,data); 
               });
 
             });
@@ -161,3 +165,59 @@ searchBtn.addEventListener("click",(e)=>{
         getMovies(API_URL);
     }
 }) 
+
+const closeModalButton = document.querySelectorAll("[data-close-button]");
+const overlay = document.querySelector("#overlay");
+
+closeModalButton.forEach(button=>{
+    button.addEventListener("click",()=>{
+        const modal = button.closest(".modal");
+        closeModal(modal);
+    })
+});
+
+overlay.addEventListener("click",()=>{
+    const modals = document.querySelectorAll(".modal.movieActive");
+    modals.forEach(modal=>{
+        closeModal(modal);
+    })
+})
+
+function openModal(modal,data){
+    if(modal===null) return;
+    modal.classList.add("movieActive");
+    overlay.classList.add("movieActive");
+    const {poster_path,original_title,vote_average,original_language,runtime,genres,overview} = data;
+    let price = Math.floor(Math.random() * 50) + 250;
+    modal.innerHTML = `
+      <div class="modal-header">
+        <button data-close-button class="closeButton">&times;</button>
+      </div>
+      <div class="modal-body">
+      <div class="img-container">
+          <img src="${IMAGE_URL+poster_path}" alt="${original_title}" />
+      </div>
+      <div class="movie-details-container">
+          <div class="movie-title">${original_title}</div>
+          <div class="rating-movie">${vote_average.toFixed(1)+"/10"}</div>
+          <div class="language-movie">${original_language.toUpperCase()}</div>
+          <div class="runtime-genre-container">
+              <div class="runtime-movie">${runtime+" minutes"}</div>
+              <div class="separate">|</div>
+              <div class="genre">${genres[0].name}</div>
+          </div>
+          <div class="overview">${overview}</div>
+          <div class="price">${"Rs "+price}</div>
+      </div>
+      <div class="footer">
+          <button class="book">Book Tickets</button>
+      </div>
+  </div>
+    `;
+}
+
+function closeModal(modal){
+    if(modal===null) return;
+    modal.classList.remove("movieActive");
+    overlay.classList.remove("movieActive");
+}
