@@ -10,19 +10,25 @@ const startBtn = document.querySelector(".start");
 //variables
 let sec, min, hrs, setTime, startTime, futureTime, remainingTime;
 let interval, pauseDuration = 0;
-let start = false;
+let start = false, pauseStatus = false;
 let pauseStart = 0;
 let pauseResume = 0;
-let widthofProgessBar = 1;
+let widthofProgessBar = 0;
+let progressBarColor = "green";
+let progressIndicatorColor = "green";
 
 
 //reset function to reset the timer to initial stage
 function reset(){
     clearInterval(interval);
+    removeActiveClassBtns();
+    resetBtn.classList.add("active");
     remainingTime = 0;
     start = false;
     pauseDuration = 0;
     pauseBtn.innerHTML = "Pause";
+    progressBar.style.backgroundColor = progressBarColor;
+    progressIndicator.style.color = progressIndicatorColor;
     progressBarIndicator(0);
     progressIndicatorPercent(0);
     let input = document.querySelectorAll(".inputs");
@@ -34,17 +40,23 @@ function reset(){
 
 //pause the timer it will hold the previous time
 function pause(){
-    if(start){
+    if(start && !pauseStatus){
         pauseStart = Date.now();
         clearInterval(interval);
         pauseBtn.innerHTML = "Resume";
+        removeActiveClassBtns();
+        pauseBtn.classList.add("active");
         start = false;
+        pauseStatus = true;
     }
-    else{
+    else if(!start && pauseStatus){
         pauseResume = Date.now();
         pauseDuration += pauseResume - pauseStart;
         pauseBtn.innerHTML = "Pause";
+        removeActiveClassBtns();
+        pauseBtn.classList.add("active");
         start = true;
+        pauseStatus = false;
         // console.log("pause duration from pause function is "+pauseDuration);
         interval = setInterval(countdownTimer,1000);
     }
@@ -64,10 +76,12 @@ function countdownTimer(){
         input[1].value = min;
         input[0].value = hrs;
         // console.log("remaining time "+remainingTime/1000);
-        widthofProgessBar = (remainingTime*100)/setTime;
+        widthofProgessBar = 100 - (remainingTime*100)/setTime;
         console.log("width of progress bar is "+ widthofProgessBar);
-        progressBarIndicator(100-widthofProgessBar);
-        progressIndicatorPercent(100-widthofProgessBar)
+        progressBarIndicator(widthofProgessBar);
+        progressIndicatorPercent(widthofProgessBar);
+        removeActiveClassBtns();
+        startBtn.classList.add("active");
     }
     else{
         reset();
@@ -91,6 +105,8 @@ startBtn.addEventListener("click",(e)=>{
         futureTime = startTime + setTime;
         start = true;
         interval = setInterval(countdownTimer,1000);
+        removeActiveClassBtns();
+        startBtn.classList.add("active");
     }
 
 });
@@ -101,14 +117,41 @@ resetBtn.addEventListener("click",reset);
 //adding event listener to Pause Btn
 pauseBtn.addEventListener("click",pause);
 
-
-function progressBarIndicator(width=1){
-    console.log("width is "+width);
+//function to show progress of timer using progressBar
+function progressBarIndicator(width=0){
+    console.log("width is "+ width);
+    if(width>=90)
+        progressBarColor = "red";
+    else if(width>=80)
+        progressBarColor = "orange";
+    else
+        progressBarColor = "green";
+    progressBar.style.backgroundColor = progressBarColor;
     progressBar.style.width = width+"%";
 }
+
+//function to show progress of timer in percent using progressIndicator
 function progressIndicatorPercent(percent){  
     percent = parseInt(percent);
-    progressIndicator.innerHTML = percent+"%";
+    if(percent>=90)
+        progressIndicatorColor = "red";
+    else if(percent>=80)
+        progressIndicatorColor = "orange";
+    else
+        progressIndicatorColor = "green";
+    
+    if(percent>0)
+        progressIndicator.innerHTML = percent+"%";
+    else
+        progressIndicator.innerHTML = "";
+            
+    progressIndicator.style.color = progressIndicatorColor;
+}
+function removeActiveClassBtns(){
+    const btns = document.querySelectorAll(".btn");
+    btns.forEach(button=>{
+        button.classList.remove("active");
+    })
 }
 
 

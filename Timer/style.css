@@ -6,7 +6,7 @@ body{
     background-color: black;
 }
 h1,span{
-    color:orange;
+    color:yellow;
 }
 span{
     font-size: larger;
@@ -35,7 +35,7 @@ h1{
     width:60dvw;
     height:40dvh;
     background-color: hsla(0, 0%, 20%, 0.637);
-    border:1px solid orange;
+    border:1px solid yellow;
     border-radius:10px;
     margin:auto;
     /* position:absolute; */
@@ -82,19 +82,12 @@ h1{
     background-color: black;
     color: white;
 }
-.active{
-    background-color: red;
-    color:white;
-    border:1px solid whitesmoke;
-    border-radius:4px;
-    padding:4px;
-}
 .inputs{
     width:15%;
     height:15%;
     background-color: black;
     color:hsla(60, 100%, 50%, 0.89);
-    border:1px solid orange;
+    border:1px solid hsla(60, 100%, 50%, 0.89);
     text-align: center;
     font-size: 150%;
     border-radius: 8px;
@@ -112,17 +105,29 @@ input::-webkit-inner-spin-button {
     align-items: center;
     height:5vh;
     width:60dvw;
-    background-color: rgba(128, 128, 128, 0.342);
+    /* background-color: rgba(128, 128, 128, 0.342); */
+    background-color: none;
     border-radius:8px;
-    border: thin solid orange;
+    /* border: thin solid orange; */
+    border:none;
+
 }
 .bar{
-    width:1%;
-    height:98%;
-    background-color: orangered;
+    width:0;
+    height:10%;
+    border-radius:8px;
+    background-color: green;
 }
 .progressIndicator{
     color: orange;
     font-size:20px;
     font-weight: bold;
+}
+.active{
+    background-color: green;
+    border-radius:8px;
+    color:white;
+    /* border:1px solid whitesmoke; */
+    border-radius:8px;
+    padding:4px;
 }
