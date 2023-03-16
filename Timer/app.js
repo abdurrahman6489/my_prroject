@@ -2,6 +2,7 @@
 const progressBarContainer = document.getElementById("ProgressBar");
 const progressBar = document.getElementById("bar");
 const progressIndicator = document.querySelector(".progressIndicator");
+
 //reset, pause and start buttons
 const resetBtn = document.querySelector(".reset");
 const pauseBtn = document.querySelector(".pause");
@@ -9,10 +10,26 @@ const startBtn = document.querySelector(".start");
 
 //variables
 let sec, min, hrs, setTime, startTime, futureTime, remainingTime;
-let interval, pauseDuration = 0;
+
+//interval is name given to function for countdowntimer function
+//to setInterval and clearInterval
+let interval;
+
+//pause duration is to get the milliseconds for which
+// the timer was paused
+let pauseDuration = 0;
+
+//start and pauseStatus are for checking the status of
+//start and pause status of timer
 let start = false, pauseStatus = false;
+
+//pauseStart and pauseResume to get the time when the
+//pause button was clicked
 let pauseStart = 0;
 let pauseResume = 0;
+
+//the below variables are for storing the condition
+//of progress of timer
 let widthofProgessBar = 0;
 let progressBarColor = "green";
 let progressIndicatorColor = "green";
@@ -133,6 +150,7 @@ function progressBarIndicator(width=0){
 //function to show progress of timer in percent using progressIndicator
 function progressIndicatorPercent(percent){  
     percent = parseInt(percent);
+    
     if(percent>=90)
         progressIndicatorColor = "red";
     else if(percent>=80)
