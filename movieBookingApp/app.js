@@ -166,32 +166,18 @@ searchBtn.addEventListener("click",(e)=>{
     }
 }) 
 
-const closeModalButton = document.querySelectorAll("[data-close-button]");
-const overlay = document.querySelector("#overlay");
+// const closeModalButton = document.querySelectorAll("[data-close-button]");
 
-closeModalButton.forEach(button=>{
-    button.addEventListener("click",()=>{
-        const modal = button.closest(".modal");
-        closeModal(modal);
-    })
-});
-
-overlay.addEventListener("click",()=>{
-    const modals = document.querySelectorAll(".modal.movieActive");
-    modals.forEach(modal=>{
-        closeModal(modal);
-    })
-})
 
 function openModal(modal,data){
     if(modal===null) return;
-    modal.classList.add("movieActive");
-    overlay.classList.add("movieActive");
+    modal.classList.add("Active");
+    overlay.classList.add("Active");
     const {poster_path,original_title,vote_average,original_language,runtime,genres,overview} = data;
     let price = Math.floor(Math.random() * 50) + 250;
     modal.innerHTML = `
       <div class="modal-header">
-        <button data-close-button class="closeButton">&times;</button>
+        <button data-close-button id="closeBtn" class="closeButton">&times;</button>
       </div>
       <div class="modal-body">
       <div class="img-container">
@@ -214,10 +200,32 @@ function openModal(modal,data){
       </div>
   </div>
     `;
+    console.log("modal opened");
 }
 
+const closeModalButton = document.querySelector("#closeBtn");
+const overlay = document.querySelector("#overlay");
+
+closeModalButton.addEventListener("click",()=>{
+  console.log("from closeButton");  
+  const modals = document.querySelector(".modal.Active");
+  closeModal(modals);
+})
+
+overlay.addEventListener("click",()=>{
+  console.log("from overlay");  
+  const modals = document.querySelectorAll(".modal.Active");
+    modals.forEach(modal=>{
+      closeModal(modal);
+    })
+})
+
 function closeModal(modal){
-    if(modal===null) return;
-    modal.classList.remove("movieActive");
-    overlay.classList.remove("movieActive");
+    if(modal===null) {
+      console.log("modal not found");
+      return;
+    };
+    console.log("modal closed");
+    modal.classList.remove("Active");
+    overlay.classList.remove("Active");
 }
