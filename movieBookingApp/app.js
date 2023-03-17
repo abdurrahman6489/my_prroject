@@ -17,17 +17,14 @@ const searchQuery = "search/movie?";
 const searchURL = BASE_URL + searchQuery + API_KEY+ "&query=";
 
 
-// getMovieRuntime("315162");
-function getMovieRuntime(movieId){
+//this function is to build api link for 
+//getting Movie details
+function getMovieUrl(movieId){
     let url = BASE_URL + "movie/" + movieId +"?"+ API_KEY;
-    fetch(url).then(res=> res.json()).then(data=>{
-      return data.runtime;
-    });
+    return url;
 }
 
 getMovies(API_URL);
-getGenres(genreQuery);
-
 //fetch url to get movies
 function getMovies(url){
     fetch(url).then(res => res.json()).then(data =>{
@@ -35,7 +32,7 @@ function getMovies(url){
     });
 }
 
-let allGenres = [];
+getGenres(genreQuery);
 //get movies genres from the api
 function getGenres(url){
     fetch(url).then(res=> res.json()).then(data=>{
@@ -43,21 +40,6 @@ function getGenres(url){
     });
 }
 
-// getGenreName(28);
-function getGenreName(currentId){
-
-  let url = genreQuery;
-  fetch(url).then(res=> res.json()).then(data=>{
-    for(let genreData of data.genres){
-      let {id,name} = genreData;
-      if(genreData.id===currentId){
-        console.log("in getGenreName function " + id);
-        console.log("in getGenreName function " + name);
-        currentGenre = name;
-      }
-    }
-});
-}
 //delete all movie elements before loading the new ones
 //so that no mixing of movies occurs
 function deleteMovies(){
@@ -66,22 +48,7 @@ function deleteMovies(){
     }
 }
 
-//this class is made to fill all the details of a movie when a movie element
-//is clicked
-class FillSelectedMovieDetails {
-  constructor(title, rating, language,  genre, duration, overview, imgSrc, price) {
-    this.title = title;
-    this.rating = rating;
-    this.language = language;
-    this.genre = genre;
-    this.duration = duration;
-    this.overview = overview;
-    this.imgSrc = imgSrc;
-    this.price = function () {
-      return Math.floor(Math.random() * 50) + 250;
-    };
-  }
-}
+
 
 //main function to add all the movie elements in
 //the movie container
@@ -101,7 +68,7 @@ function addMovie(data){
             movieCardContainer.appendChild(movieElement);
             movieElement.addEventListener("click",(e)=>{
               let movieId= e.currentTarget.id;
-              let url = BASE_URL + "movie/" + movieId +"?"+ API_KEY;
+              let url = getMovieUrl(movieId);
               fetch(url).then(res=> res.json()).then(data=>{
                 // return data.runtime;
                 console.log(data);
@@ -117,7 +84,6 @@ function addMovie(data){
 //this section is made to add all the genres from the api
 //and filter the movies based on the selected genre/s
 let selectedGenre = [];
-
 // main function for adding all the Genres;
 function addGenre(genreData){
     let genreHeading = document.createElement("div");
@@ -166,9 +132,9 @@ searchBtn.addEventListener("click",(e)=>{
     }
 }) 
 
-// const closeModalButton = document.querySelectorAll("[data-close-button]");
-
-
+//this function is for displaying the modal
+//when an individual movie is clicked
+//showing the movie Details
 function openModal(modal,data){
     if(modal===null) return;
     modal.classList.add("Active");
@@ -177,7 +143,7 @@ function openModal(modal,data){
     let price = Math.floor(Math.random() * 50) + 250;
     modal.innerHTML = `
       <div class="modal-header">
-        <button data-close-button id="closeBtn" class="closeButton">&times;</button>
+        <button id="closeBtn" class="closeButton">&times;</button>
       </div>
       <div class="modal-body">
       <div class="img-container">
@@ -201,17 +167,20 @@ function openModal(modal,data){
   </div>
     `;
     console.log("modal opened");
+    const closeModalButton = document.querySelector("#closeBtn");
+    closeModalButton.addEventListener("click",()=>{
+      console.log("clicked close button");
+      modal.classList.remove("Active");
+      overlay.classList.remove("Active");
+    })
 }
 
-const closeModalButton = document.querySelector("#closeBtn");
+//this overlay is on the whole page when a modal
+//display the modal Details to prevent any other movie
+//to be clicked
 const overlay = document.querySelector("#overlay");
-
-closeModalButton.addEventListener("click",()=>{
-  console.log("from closeButton");  
-  const modals = document.querySelector(".modal.Active");
-  closeModal(modals);
-})
-
+//adding event listener to overlay element so when
+//it is clicked, the modal is hidden
 overlay.addEventListener("click",()=>{
   console.log("from overlay");  
   const modals = document.querySelectorAll(".modal.Active");
@@ -220,6 +189,7 @@ overlay.addEventListener("click",()=>{
     })
 })
 
+//this function is to hide the modal display
 function closeModal(modal){
     if(modal===null) {
       console.log("modal not found");
