@@ -166,13 +166,18 @@ function openModal(modal,data){
       </div>
   </div>
     `;
-    console.log("modal opened");
+
     const closeModalButton = document.querySelector("#closeBtn");
     closeModalButton.addEventListener("click",()=>{
-      console.log("clicked close button");
       modal.classList.remove("Active");
       overlay.classList.remove("Active");
     })
+    const bookBtn = document.querySelector(".book");
+    bookBtn.addEventListener("click",()=>{
+        window.open("./payment.html");
+        localStorage.setItem("price",price);
+        localStorage.setItem("original_title",original_title);
+    });
 }
 
 //this overlay is on the whole page when a modal

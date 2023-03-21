@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The MoviAPP-Payment</title>
+    <link href="./payment.css" rel="stylesheet">
+    <script src="./payment.js"></script>
+</head>
+<body>
+    <header>
+        <button onClick=window.location.href="index.html" id="backBtn">Back</button>
+        <h1 title="checkout">Checkout</h1>
+    </header>
+    <div class="body-container">
+        <div class="summary-container">
+            <section class="summary">
+                <h2 title="summary">Summary</h2>
+                <div class="movieDetails-summary">
+                    <div class="selectedMovieName">The Whale</div>
+                    <div class="selectedMoviePrice">Rs 250</div>
+                </div>
+                <div class="ticketDetails-summary">
+                    <label for="noOfTickets">Number of Tickets</label>
+                    <input type="number" id="noOfTickets" value="1" required/>
+                </div>
+                <div class="convenienceFee-summary">
+                    <div>Convenience Fee (1.75%)</div>
+                    <div class="convenienceFee">Rs 8.75</div>
+                </div>
+                <div class="totalAmount-summary">
+                    <div>Sub Total</div>
+                    <div class="totalFee">Rs 508.75</div>
+                </div>
+            </section>
+        </div>
+        <div class="payment-container">
+            <h2>Payment</h2>
+            <form>
+                <div class="customer-details">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" required/>
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" required/>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required/>
+                </div>
+                <div class="payment-methods">
+                    <label for="creditCard">Credit Card</label>
+                    <input type="radio" id="creditCard" checked/>
+                    <label for="debitCard">Debit Card</label>
+                    <input type="radio" id="debitCard"/>
+                    <label for="upi">UPI</label>
+                    <input type="radio" id="upi"/>
+                </div>
+                <div class="payment-details">
+                    <label for="cardname">Name on Card</label>
+                    <input type="text" id="cardname" required/>
+                    <label for="cardNo">Credit Card Number</label>
+                    <input type="number" id="cardNo" required/>
+                    <label for="expiration">Expiration</label>
+                    <input type="date" id="expiration" required/>
+                    <input type="number" placeholder="CVV" required/>
+                    <input type="text" placeholder="abc@abcab" required/>
+                    <input type="submit" id="verify" value="verify"/>
+                    <button id="pay">Proceed to Pay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 
