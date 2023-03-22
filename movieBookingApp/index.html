@@ -10,11 +10,13 @@
 </head>
 <body>
     <div class="container">
+        <!-- Nav contaier for the logo, the search bar and button and  -->
         <nav class="nav-container">
             <div class="logo">The MoviAPP</div>
             <input type="text" id="search" placeholder="search the movie" required/>
             <button type="submit" id="searchBtn">Search</button>
         </nav>
+        <!-- the modal to display when the user clicks on any movie card -->
         <div class="modal" id="modal">
             <div class="modal-header">
                 <button id="closeBtn" class="closeButton">&times;</button>
@@ -40,13 +42,13 @@
               </div>
           </div>
         </div>
+        <!-- overlay on the modal when modal is displayed when overlay is clicked, modal hides-->
         <div id="overlay"></div>
         <aside class="genre-container">
         </aside>
         <div class="movie-container">
             <h1>Get Now Playing</h1>
             <div class="movieCard-Container">
-
             </div>
         </div>
     </div>

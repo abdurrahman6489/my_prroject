@@ -18,14 +18,15 @@ const searchURL = BASE_URL + searchQuery + API_KEY+ "&query=";
 
 
 //this function is to build api link for 
-//getting Movie details
+//getting Movie details of a particular movie by
+//entering its movieId
 function getMovieUrl(movieId){
     let url = BASE_URL + "movie/" + movieId +"?"+ API_KEY;
     return url;
 }
 
 getMovies(API_URL);
-//fetch url to get movies
+//this function is to fetch url to get all movies based on the query => get-now-playing
 function getMovies(url){
     fetch(url).then(res => res.json()).then(data =>{
         addMovie(data.results);
@@ -47,8 +48,6 @@ function deleteMovies(){
         movieCardContainer.removeChild(movieCardContainer.firstChild);
     }
 }
-
-
 
 //main function to add all the movie elements in
 //the movie container
@@ -167,14 +166,22 @@ function openModal(modal,data){
   </div>
     `;
 
+    //selecting the close button on the modal and adding
+    //event listener to it
     const closeModalButton = document.querySelector("#closeBtn");
     closeModalButton.addEventListener("click",()=>{
       modal.classList.remove("Active");
       overlay.classList.remove("Active");
     })
+
+    //selecting the book ticket button and adding
+    //event listener to it, by clickiing on it goes
+    //to payment page showing total amount to pay
     const bookBtn = document.querySelector(".book");
     bookBtn.addEventListener("click",()=>{
         window.open("./payment.html");
+        //storing the current price and the movie title of the movie
+        //selected to show in payment page
         localStorage.setItem("price",price);
         localStorage.setItem("original_title",original_title);
     });

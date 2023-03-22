@@ -11,3 +11,6 @@ It also has a search functionality : we can search any movie by writing the name
 
 If any movie is clicked, further details of movie appears inside a modal in the center of the page.
 If I click on the Book Tickets button, it will go to next page of payment for the tickets.
+
+In the payment page, movie title, price, total fee including convenience fee is shown.
+if user changes no. of tickets, the total amount gets updated accordingly.

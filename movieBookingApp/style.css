@@ -6,7 +6,6 @@ body{
     box-sizing: border-box;
     overflow: hidden;
     background-color: #ebe534;
-    /* background-color: #99a832; */
     color:#0e2518;
 }
 .container{
@@ -15,7 +14,6 @@ body{
     width:100dvw;
     display:grid;
     overflow: hidden;
-    /* border:1px solid blueviolet; */
 }
 .nav-container{
     grid-row: 1/2;
@@ -29,7 +27,6 @@ body{
     gap:10px;
     background-color: rgba(0, 0, 0, 0.897);
     color:yellow;
-    /* border: 1px solid white; */
 }
 .genre-container{
     grid-row: 2/3;
@@ -40,7 +37,6 @@ body{
     justify-content: flex-start;
     align-items: center;
     overflow-y: auto;
-    /* border:1px solid green; */
 }
 .genre-container::-webkit-scrollbar{
     display: none;
@@ -73,8 +69,6 @@ body{
 .movie-container{ 
     grid-row:2/3;
     grid-column:2/3;
-    /* height:94dvh; */
-    /* border:1px solid red; */
 }
 .movieCard-Container{
     display: grid;
@@ -176,7 +170,6 @@ img{
 }
 .active{
     background-color: orangered;
-    /* background-color: green; */
     color:white
 }
 

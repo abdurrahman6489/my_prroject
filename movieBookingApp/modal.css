@@ -14,7 +14,6 @@
     z-index: 10;
     width:50%;
     max-width: 80%;
-    /* overflow:auto; */
 }
 .modal-body{
     height:95%;
@@ -47,7 +46,6 @@
     grid-row:1/2;
     grid-column: 1/2;
     height:100%;
-    /* background-color: blue; */
 }
 .img-container img{
     height:85%;

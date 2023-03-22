@@ -15,6 +15,8 @@
     </header>
     <div class="body-container">
         <div class="summary-container">
+            <!-- summary shows the movie name, no. of tickets, convenience fee charged
+            and the total price of the ticket including the convenience Fee -->
             <section class="summary">
                 <h2 title="summary">Summary</h2>
                 <div class="movieDetails-summary">
@@ -38,6 +40,7 @@
         <div class="payment-container">
             <h2>Payment</h2>
             <form>
+                <!-- customer details for payment -->
                 <div class="customer-details">
                     <label for="firstname">First Name</label>
                     <input type="text" id="firstname" required/>
@@ -46,26 +49,27 @@
                     <label for="email">Email</label>
                     <input type="email" id="email" required/>
                 </div>
+                <!-- Radio Buttons for payment method => either Credit Card, Debit Card or UPI-->
                 <div class="payment-methods">
                     <label for="creditCard">Credit Card</label>
-                    <input type="radio" id="creditCard" checked/>
+                    <input type="radio" name="payment-method" id="creditCard" checked/>
                     <label for="debitCard">Debit Card</label>
-                    <input type="radio" id="debitCard"/>
+                    <input type="radio" name="payment-method" id="debitCard"/>
                     <label for="upi">UPI</label>
-                    <input type="radio" id="upi"/>
+                    <input type="radio" name="payment-method" id="upi"/>
                 </div>
                 <div class="payment-details">
                     <label for="cardname">Name on Card</label>
                     <input type="text" id="cardname" required/>
-                    <label for="cardNo">Credit Card Number</label>
+                    <label for="cardNo">Card Number</label>
                     <input type="number" id="cardNo" required/>
                     <label for="expiration">Expiration</label>
                     <input type="date" id="expiration" required/>
                     <input type="number" placeholder="CVV" required/>
-                    <input type="text" placeholder="abc@abcab" required/>
-                    <input type="submit" id="verify" value="verify"/>
-                    <button id="pay">Proceed to Pay</button>
+                    <input type="text" placeholder="UPI ID : abc@abcab" required/>
+                    <button id="verify">Verify</button>
                 </div>
+                <button id="pay">Proceed to Pay</button>
             </form>
         </div>
     </div>
